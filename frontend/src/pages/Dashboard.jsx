@@ -9,7 +9,14 @@ const Dashboard = () => {
         setWalletConnected(true);
     }
 
-    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let data = e.target.number.value;
+        console.log(data);
+        e.target.number.value = '';
+    }
+
+
     if(walletConnected){
         return(
             <div className='dashboard'>
@@ -24,7 +31,7 @@ const Dashboard = () => {
                     <div className="storeValue">
                         <h1 className='value'>10000</h1>
                     </div>
-                    <form>
+                    <form onSubmit={(e) => handleSubmit(e)}>
                         <input type="number" name="number" id="numberValue" placeholder='Enter any number' />
                         <button type="submit">Update</button>
                     </form>
