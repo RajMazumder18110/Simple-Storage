@@ -23,15 +23,17 @@ const Dashboard = () => {
                 setContractProvider(provider);
                 setStorageContract(contract);
                 setWalletConnected(true);
-            }
+            }    
         }
         init();
     })
 
+   if(window.ethereum){
     window.ethereum.on('accountsChanged', async (account) => {
         setWalletAddress(account[0]);
         getBalance(contractProvider, account[0]);
     })
+   }
 
     const getBalance = async (provider, address) => {
         let bal = await provider.getBalance(address);
@@ -78,10 +80,10 @@ const Dashboard = () => {
                     </div>
                     <div className="accountDetails">
                         <p className="wallet">{ walletAddress ? walletAddress.replace(walletAddress.substring(5, 37), '-xxx-') : '' }</p>
-                        <p className="balance">{ balance } ETH</p>
+                        <p className="balance">{ balance ? balance : null } ETH</p>
                     </div>
                     <div className="storeValue">
-                        <h1 className='value'>{ storeValue }</h1>
+                        <h1 className='value'>{ storeValue ? storeValue : null }</h1>
                     </div>
                     <form onSubmit={(e) => handleSubmit(e)}>
                         <input type="number" name="number" id="numberValue" placeholder='Enter any number' />
