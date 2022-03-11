@@ -43,7 +43,7 @@ const Dashboard = () => {
 
     const getValue = async (contract) => {
         let val = await contract.getStoreValue();
-        setStoreValue(val.toNumber());
+        setStoreValue(val.toString());
     }
 
     const connectWallet = async (e) => {
@@ -67,6 +67,7 @@ const Dashboard = () => {
             getValue(storageContract);
             setMinning(false);
         }catch(e){
+            alert(e.message)
             setMinning(false);
         }
     }
